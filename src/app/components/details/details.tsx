@@ -58,7 +58,7 @@ export default function Details({}: Props) {
 
           <div className="w-72 flex flex-col flex-nowrap m-auto">
             <div className="w-full h-10 mb-4">
-              <label for="Selecting a Team" className="sr-only">
+              <label htmlFor="Selecting a Team" className="sr-only">
                 Pick a Team
               </label>
               <select
@@ -92,7 +92,7 @@ export default function Details({}: Props) {
                   <span className="m-auto text-2xl font-thin">+</span>
                 </button>
                 <div className="w-2/5">
-                  <label for="currency" className="sr-only">
+                  <label htmlFor="currency" className="sr-only">
                     Currency
                   </label>
                   <select

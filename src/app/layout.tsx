@@ -1,23 +1,32 @@
-import './globals.css'
-import NavBar from './components/navbar/Navbar'
+'use client';
 
+import { ThirdwebProvider } from '@thirdweb-dev/react';
+import { Sepolia } from '@thirdweb-dev/chains';
 
+import './globals.css';
+import NavBar from './components/navbar/Navbar';
+import { thirdWeb_clientId } from '@/constants/ContractAdresses';
+import StoreProvider from './globalStore/store';
 
 export const metadata = {
   title: 'Decent-Bet',
   description: 'A Decentralized Sports Predictor',
-}
+};
 
 export default function RootLayout({
   children,
 }: {
-  children: React.ReactNode
+  children: React.ReactNode;
 }) {
   return (
     <html lang="en">
       <body>
-        {/* <header><NavBar /></header> */}
-        {children}
+        <ThirdwebProvider activeChain={Sepolia} clientId={thirdWeb_clientId}>
+          <StoreProvider>
+            {/* <header><NavBar /></header> */}
+            {children}
+          </StoreProvider>
+        </ThirdwebProvider>
       </body>
     </html>
   );

@@ -1,5 +1,8 @@
+'use client';
+
 import Image from 'next/image';
 import Link from 'next/link';
+import { ConnectWallet } from '@thirdweb-dev/react';
 
 function Navbar() {
   return (
@@ -48,7 +51,9 @@ function Navbar() {
               className="pb-6 text-xl text-white py-2 px-6 text-center md:ml-40
              border-b-2 md:border-b-0  hover:bg-purple-600  border-purple-900  md:hover:text-purple-600 md:hover:bg-transparent"
             >
-              <Link href="#projects">Connect</Link>
+              <Link href="#projects">
+                <ConnectWallet className=' !bg-green-600' />
+              </Link>
             </li>
           </ul>
         </div>

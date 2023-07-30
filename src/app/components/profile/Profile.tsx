@@ -4,8 +4,8 @@ type Props = {};
 
 export default function Profile({}: Props) {
   return (
-    <div className="p-16">
-      <div className="p-8 bg-white shadow mt-24">
+    <div className="p-16 bg-green-100">
+      <div className="p-8 bg-white shadow-lg mt-24">
         {' '}
         <div className="grid grid-cols-1 md:grid-cols-3">
           {' '}
@@ -14,17 +14,17 @@ export default function Profile({}: Props) {
             <div>
               {' '}
               <p className="font-bold text-gray-700 text-xl">22</p>{' '}
-              <p className="text-gray-400">Friends</p>{' '}
+              <p className="text-gray-400">My Matches</p>{' '}
             </div>{' '}
             <div>
               {' '}
               <p className="font-bold text-gray-700 text-xl">10</p>{' '}
-              <p className="text-gray-400">Photos</p>{' '}
+              <p className="text-gray-400">Wishlist</p>{' '}
             </div>{' '}
             <div>
               {' '}
               <p className="font-bold text-gray-700 text-xl">89</p>{' '}
-              <p className="text-gray-400">Comments</p>{' '}
+              <p className="text-gray-400">Remainders</p>{' '}
             </div>{' '}
           </div>{' '}
           <div className="relative">
@@ -34,7 +34,7 @@ export default function Profile({}: Props) {
                 xmlns="http://www.w3.org/2000/svg"
                 className="h-24 w-24"
                 viewBox="0 0 20 20"
-                fill="currentColor"
+                fill="lightGreen"
               >
                 {' '}
                 <path
@@ -56,7 +56,7 @@ export default function Profile({}: Props) {
             </button>{' '}
           </div>{' '}
         </div>{' '}
-        <div className="mt-20 text-center border-b pb-12">
+        <div className="mt-20 text-center border-b-2 pb-12">
           {' '}
           <h1 className="text-4xl font-medium text-gray-700">
             Jessica Jones, <span className="font-light text-gray-500">27</span>
