@@ -6,7 +6,7 @@ import { ConnectWallet } from '@thirdweb-dev/react';
 
 function Navbar() {
   return (
-    <nav className="w-full  fixed top-0 left-0 right-0 z-10">
+    <nav className="w-full  fixed top-0 left-0 right-0 z-10 bg-gradient-to-b from-black to-transparent">
       <div className="justify-between px-4 mx-auto lg:max-w-7xl md:items-center md:flex md:px-8">
         <div className="flex items-center justify-between py-3 md:py-5 md:block">
           {/* LOGO */}
@@ -52,7 +52,7 @@ function Navbar() {
              border-b-2 md:border-b-0  hover:bg-purple-600  border-purple-900  md:hover:text-purple-600 md:hover:bg-transparent"
             >
               <Link href="#projects">
-                <ConnectWallet className=' !bg-green-600' />
+                <ConnectWallet className=" !bg-green-600" />
               </Link>
             </li>
           </ul>

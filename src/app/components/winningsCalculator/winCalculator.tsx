@@ -1,13 +1,11 @@
-import { winCalProps } from '@/app/Types/types';
-import React from 'react';
-
-type Props = {};
 
 export default function winCalculator(
   sampleAmount1: number,
   sampleAmount2: number,
   teamA_stake: number,
-  teamB_stake: number
+  teamB_stake: number,
+  playerStake_tA : number = 0,
+  playerStake_tB : number = 0,
 ) {
   console.log(
     'calcu--',
@@ -24,16 +22,18 @@ export default function winCalculator(
 
   if (sampleAmount1 * (teamB_stake + sampleAmount2) !== 0) {
     team1_Winings =
-      (sampleAmount1 * (teamB_stake + sampleAmount2)) /
+      ((sampleAmount1 + playerStake_tA) * (teamB_stake + sampleAmount2)) /
         (teamA_stake + sampleAmount1) +
-      sampleAmount1;
+      sampleAmount1 +
+      playerStake_tA;
   }
 
   if (sampleAmount2 * (teamA_stake + sampleAmount1) !== 0) {
     team2_Winings =
-      (sampleAmount2 * (teamA_stake + sampleAmount1)) /
+      ((sampleAmount2 + playerStake_tB) * (teamA_stake + sampleAmount1)) /
         (teamB_stake + sampleAmount2) +
-      sampleAmount2;
+      sampleAmount2 +
+      playerStake_tB;
   }
 
   console.log('calc-teamWinnigs', team1_Winings, team2_Winings);

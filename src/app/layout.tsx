@@ -6,7 +6,7 @@ import { Sepolia } from '@thirdweb-dev/chains';
 import './globals.css';
 import NavBar from './components/navbar/Navbar';
 import { thirdWeb_clientId } from '@/constants/ContractAdresses';
-import StoreProvider from './globalStore/store';
+import StoreProvider from './context/store';
 
 export const metadata = {
   title: 'Decent-Bet',
@@ -23,7 +23,7 @@ export default function RootLayout({
       <body>
         <ThirdwebProvider activeChain={Sepolia} clientId={thirdWeb_clientId}>
           <StoreProvider>
-            {/* <header><NavBar /></header> */}
+            <header><NavBar /></header>
             {children}
           </StoreProvider>
         </ThirdwebProvider>

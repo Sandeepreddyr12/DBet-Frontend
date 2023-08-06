@@ -6,8 +6,7 @@ type Props = {}
 export default function matchCard({}: Props) {
   return (
     <div className="relative w-full max-w-3xl p-2 min-w-max mx-5 my-6 bg-white border rounded-lg   dark:bg-gray-800 dark:border-gray-700 cursor-pointer shadow-lg">
-      {/* <div className="w-full p-4 dark:bg-gray-800"> */}
-      {/* <div className="text-cyan-200 text-center "> icc odi worldcup</div> */}
+      <div className="text-cyan-200 text-lg font-extrabold font-mono text-center mb-5 "> ICC ODI Worldcup</div>
       <div className="h-5 w-max px-3 bg-green-500 rounded-full absolute top-1.5 right-3 hover:opacity-80 cursor-pointer ">
         <div className="relative">
           <p className="text-xs pt-0.5 text-blue-100 font-semibold text-center align-text-bottom">
@@ -68,6 +67,6 @@ export default function matchCard({}: Props) {
         </div>
       </dl>
     </div>
-    // </div>
+    
   );
 }
