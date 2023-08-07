@@ -59,21 +59,16 @@ export default function Profile({}: Props) {
         <div className="mt-20 text-center border-b-2 pb-12">
           {' '}
           <h1 className="text-4xl font-medium text-gray-700">
-            Jessica Jones, <span className="font-light text-gray-500">27</span>
+            Sandeep Reddy, <span className="font-light text-gray-500">25</span>
           </h1>{' '}
-          <p className="font-light text-gray-600 mt-3">Bucharest, Romania</p>{' '}
-          <p className="mt-8 text-gray-500">
-            Solution Manager - Creative Tim Officer
-          </p>{' '}
-          <p className="mt-2 text-gray-500">University of Computer Science</p>{' '}
+          <p className="font-light text-gray-600 mt-3">Hyderbad, India</p>{' '}
+          <p className="mt-8 text-gray-500">Web Developer</p>{' '}
         </div>{' '}
         <div className="mt-12 flex flex-col justify-center">
           {' '}
-          <p className="text-gray-600 text-center font-light lg:px-16">
-            An artist of considerable range, Ryan — the name taken by
-            Melbourne-raised, Brooklyn-based Nick Murphy — writes, performs and
-            records all of his own music, giving it a warm, intimate feel with a
-            solid groove structure. An artist of considerable range.
+          <p className="text-gray-600 text-center font-light lg:px-16 capitalize">
+            planned centralized profile page, which stores reminders and liked/wishlist matches (`it let you notified when match goes live`) in a centralized database. <br/>
+            feel to free to implement!!!!
           </p>{' '}
           <button className="text-indigo-500 py-2 px-4  font-medium mt-4">
             {' '}

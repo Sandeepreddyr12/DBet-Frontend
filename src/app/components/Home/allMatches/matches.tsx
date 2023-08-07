@@ -32,7 +32,7 @@ export default function Matches() {
 
             let docData = doc.data();
 
-            let contest = {
+            const contest = {
               teamA: docData.teamA,
               teamB: docData.teamB,
               status: docData.status,

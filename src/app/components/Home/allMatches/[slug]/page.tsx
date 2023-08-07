@@ -124,7 +124,6 @@ export default function Match({ params, data }: Props) {
     'enterContest'
   );
 
-  console.log(team,amount)
 
   const enterContestHandler = async (team:string,value:number) => {
     try {
