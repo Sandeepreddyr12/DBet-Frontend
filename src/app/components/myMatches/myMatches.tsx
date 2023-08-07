@@ -1,3 +1,4 @@
+'use client';
 /* eslint-disable react-hooks/rules-of-hooks */
 import React, { useContext } from 'react';
 
@@ -5,11 +6,12 @@ import { useCollection } from 'react-firebase-hooks/firestore';
 import { collection, doc, where, query } from 'firebase/firestore';
 import { useContractRead, useAddress } from '@thirdweb-dev/react';
 
- import { db } from '../../../../firebase';
+import { db } from '../../../../firebase';
 
 import MatchCard from './matchCard';
 import { Store } from '@/app/context/store';
 import { useRouter } from 'next/navigation';
+import { MainSpinner } from '../miscellaneous/loaders/spinners';
 
 type Props = {};
 
@@ -18,27 +20,34 @@ export default function myMatches({}: Props) {
   const address = useAddress();
   const router = useRouter();
 
-  //  const contestsRef = collection(db, 'moralis', 'events', 'Allcontests');
+  console.log(address);
 
-  //  const q = query(contestsRef, where('teamA', '==', 'SouthAfrica'));
+  // if (!address) return <div>No wallet connected</div>;
 
-  //  // eslint-disable-next-line react-hooks/rules-of-hooks
-  //  const [contests, loading, error] = useCollection(q);
+  const contestsRef = collection(db, 'moralis', 'events', 'Entercontests');
 
-  let arr = [1, 2, 3, 1, 2, 2, 3, 5, 3, 6];
+  const q = query(contestsRef, where('player', '==', (address || '').toLowerCase()));
 
-  // const routeHandler = () => {
-  //   console.log(address);
-  //   if (address) {
-  //     router.push(`/components/Home/allMatches/${matchId}`);
-  //   }
-  // };
+  // eslint-disable-next-line react-hooks/rules-of-hooks
+  const [contests, loading, error] = useCollection(q);
+
+  console.log(contests);
+
+  
 
   return (
-    <div className="w-screen flex flex-col bg-purple-100 items-center">
-      {arr.map((a, i) => (
-        <MatchCard key={a + i} />
-      ))}
+    <div>
+      {loading ? <MainSpinner /> : null}
+
+      {contests ? (
+        <div className="w-screen flex flex-col bg-purple-100 items-center">
+          {contests.docs.map((doc) => {
+           
+
+            return <MatchCard matchId={doc?.data()?.matchId} key={doc.id} />;
+          })}
+        </div>
+      ) : null}
     </div>
   );
 }
