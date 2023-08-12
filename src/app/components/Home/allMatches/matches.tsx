@@ -1,7 +1,9 @@
 'use client';
 
+import { useEffect } from 'react';
 import { useCollection } from 'react-firebase-hooks/firestore';
 import { collection, doc, where, query } from 'firebase/firestore';
+import { toast } from 'react-toastify';
 
 import Card from './card';
 import CardSkelton from '../../miscellaneous/skeletons/cardSkeleton';
@@ -13,9 +15,22 @@ export default function Matches() {
     collection(db, 'moralis', 'events', 'Allcontests')
   );
 
+  if (error) {
+    toast.error('error occured, while fetching matches ', {
+      position: 'bottom-center',
+      autoClose: 3000,
+      hideProgressBar: true,
+      closeOnClick: true,
+      pauseOnHover: false,
+      draggable: true,
+      progress: undefined,
+      theme: 'light',
+    });
+  }
+
   return (
     <div>
-      {/* {error && <strong>Error: {JSON.stringify(error)}</strong>} */}
+      {error && <strong>Error: {JSON.stringify(error)}</strong>}
       {loading ? (
         <div className="w-full flex justify-center  flex-wrap items-center">
           {' '}

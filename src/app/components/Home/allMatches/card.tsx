@@ -1,11 +1,11 @@
 'use client';
 
+import { useContext } from 'react';
 import Image from 'next/image';
 import { useRouter } from 'next/navigation';
-import { useContext } from 'react';
-
 import { useContractRead, useAddress } from '@thirdweb-dev/react';
 import { ethers } from 'ethers';
+import { toast } from 'react-toastify';
 
 import { contestProps } from '../../../Types/types';
 import Timer from '../../miscellaneous/timeCounter/timerlib';
@@ -49,21 +49,24 @@ export default function Card({ data }: contestCardProps) {
     const sampleAmount = 1; // 1 ether/buck
 
     //below formula gives the predicted winnings/returns for every buck/sample-amount you placed on each team.
-   const { team1_Winings, team2_Winings } = winCalculator(
-     sampleAmount,
-     sampleAmount,
-     teamA_stake,
-     teamB_stake,
-   );
+    const { team1_Winings, team2_Winings } = winCalculator(
+      sampleAmount,
+      sampleAmount,
+      teamA_stake,
+      teamB_stake
+    );
 
     stake1 = team1_Winings.toFixed(2); // gives the predicted returns when we place 1eth/sample-amount on team1
     stake2 = team2_Winings.toFixed(2); // gives the predicted returns when we place 1eth/sample-amount on team2
   }
 
   const routeHandler = () => {
-    console.log(address);
     if (address) {
       router.push(`/components/Home/allMatches/${matchId}`);
+    } else {
+      toast.info('Please Connect the wallet', {
+        position: 'top-right',
+      });
     }
   };
 

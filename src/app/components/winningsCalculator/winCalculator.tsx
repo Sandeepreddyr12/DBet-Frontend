@@ -7,13 +7,13 @@ export default function winCalculator(
   playerStake_tA : number = 0,
   playerStake_tB : number = 0,
 ) {
-  console.log(
-    'calcu--',
-    sampleAmount1,
-    sampleAmount2,
-    teamA_stake,
-    teamB_stake
-  );
+  // console.log(
+  //   'calcu--',
+  //   sampleAmount1,
+  //   sampleAmount2,
+  //   teamA_stake,
+  //   teamB_stake
+  // );
 
   //below formula gives the predicted winnings/returns for every buck/sample-amount you placed on each team.
 

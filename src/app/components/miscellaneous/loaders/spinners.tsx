@@ -13,7 +13,7 @@ export const DotLoader = () => {
 
 export const MainSpinner = () => {
   return (
-    <div className="w-full flex justify-center items-center">
+    <div className="w-full h-screen flex justify-center items-center">
     <div
       className="w-32 h-32 rounded-full animate-spin
                     border-x-4 border-solid border-green-500 border-t-transparent"

@@ -7,6 +7,7 @@ type Props = {
 }
 
 export default function matchCard({matchId}: Props) {
+// eslint-disable-next-line react-hooks/rules-of-hooks
 const router = useRouter();
 
   const routeHandler = () => {

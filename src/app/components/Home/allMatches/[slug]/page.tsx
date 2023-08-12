@@ -11,11 +11,15 @@ import { ethers } from 'ethers';
 import { useRouter } from 'next/navigation';
 import { useCollection } from 'react-firebase-hooks/firestore';
 import { collection, doc, where, query } from 'firebase/firestore';
+import { toast } from 'react-toastify';
 
 import { contestProps } from '../../../../Types/types';
 import { db } from '../../../../../../firebase';
 import { Store } from '@/app/context/store';
-import { DotLoader } from '../../../miscellaneous/loaders/spinners';
+import {
+  DotLoader,
+  MainSpinner,
+} from '../../../miscellaneous/loaders/spinners';
 import winCalculator from '../../../winningsCalculator/winCalculator';
 
 type Props = {
@@ -32,7 +36,6 @@ export default function Match({ params, data }: Props) {
   const [team, setTeam] = useState<string>('');
   const [amount1, setAmount1] = useState<number>(1);
   const [amount2, setAmount2] = useState<number>(1);
-
 
   const contestsRef = collection(db, 'moralis', 'events', 'Allcontests');
 
@@ -57,7 +60,7 @@ export default function Match({ params, data }: Props) {
     isLoading,
     error: playerStakError,
   } = useContractRead(sportsPredictorContract, 'getPlayerStake', [
-    params?.slug
+    params?.slug,
   ]);
 
   // console.log(playerStake,"playerstake")
@@ -74,7 +77,9 @@ export default function Match({ params, data }: Props) {
     stake2 = '--';
     playerStake_teamA = '--';
     playerStake_teamB = '--';
-    console.error('failed to read contract', error);
+    toast.error('failed to read contract', {
+      position: 'top-right',
+    });
   }
 
   if (isLoading) {
@@ -117,27 +122,32 @@ export default function Match({ params, data }: Props) {
     HelperVar = false;
   }
 
-
-  
-  const { mutateAsync: enterContest, isLoading:loadinggg } = useContractWrite(
+  const { mutateAsync: enterContest, isLoading: loadinggg } = useContractWrite(
     sportsPredictorContract,
     'enterContest'
   );
 
-
-  const enterContestHandler = async (team:string,value:number) => {
+  const enterContestHandler = async (team: string, value: number) => {
     try {
-      const data = await enterContest({ args: [params?.slug, team],overrides: {
-            value: ethers.utils.parseEther(`${value}`), // send 0.1 native token with the contract call
-          }, });
-      console.info('contract call successs', data);
+      const data = await enterContest({
+        args: [params?.slug, team],
+        overrides: {
+          value: ethers.utils.parseEther(`${value}`), // send 0.1 native token with the contract call
+        },
+      });
+      // console.info('contract call successs', data);
+      toast.success('entered contest', {
+        position: 'top-right',
+      });
     } catch (err) {
-      console.error('contract call failure', err);
+      // console.error('contract call failure', err);
+      toast.error('contract call failure', {
+        position: 'top-right',
+      });
     }
   };
 
-  console.log(loadinggg,"writefunction")
-
+  console.log(loadinggg, 'writefunction');
 
   // if (!address) {
   //   console.log('aaaaa');
@@ -147,8 +157,10 @@ export default function Match({ params, data }: Props) {
 
   // useEffect(() => {
   //   if (!address) {
-  //     console.log('aaaaa');
   //     router.back();
+  // toast.error('Please Connect the wallet', {
+  //   position: 'top-right',
+  // });
   //     // return;
   //   }
   // }, [address]);
@@ -192,7 +204,9 @@ export default function Match({ params, data }: Props) {
             <div className="col-span-2 col-start-4 row-start-3 w-full bg-green-200 font-bold text-green-800 py-1 rounded-lg">
               Your Stake
             </div>
-            <div className="col-span-3 row-start-4">{team1_Winings.toFixed(2)}</div>
+            <div className="col-span-3 row-start-4">
+              {team1_Winings.toFixed(2)}
+            </div>
             <div className="col-span-2 text-sm col-start-4 row-start-4 w-full bg-green-200 font-bold text-green-800 py-1 rounded-lg">
               predicted winnings
             </div>
@@ -239,10 +253,14 @@ export default function Match({ params, data }: Props) {
           </div>
         </div>
         <div className="relative product-detail w-1/2 space-y-10 justify-self-center">
-          <div className={`h-5 w-max px-2 ${HelperVar ? "bg-green-500" : "bg-red-800" }  rounded-full absolute top-3.5 right-6 hover:opacity-80 cursor-pointer `}>
+          <div
+            className={`h-5 w-max px-2 ${
+              HelperVar ? 'bg-green-500' : 'bg-red-800'
+            }  rounded-full absolute top-3.5 right-6 hover:opacity-80 cursor-pointer `}
+          >
             <p className="text-xs pt-0.5 tracking-wider text-blue-100 font-semibold text-center align-text-bottom">
               {HelperVar ? 'Live' : 'Closed'}
-            </p>  
+            </p>
           </div>
           <h1 className="text-3xl tracking-wider font-serif font-bold bg-gradient-to-r from-teal-600 to-green-800 bg-clip-text text-transparent">
             {matchDetails?.teamA || '--'}{' '}
@@ -279,7 +297,9 @@ export default function Match({ params, data }: Props) {
                 id="selectTeam"
                 name="selectTeam"
                 onChange={(e) => setTeam(e.target.value)}
-                className={`${!HelperVar ? "cursor-not-allowed" : '' } h-full w-full rounded-md border-0 bg-slate-200 py-0 pl-2 pr-7 text-gray-900 font-bold focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm`}
+                className={`${
+                  !HelperVar ? 'cursor-not-allowed' : ''
+                } h-full w-full rounded-md border-0 bg-slate-200 py-0 pl-2 pr-7 text-gray-900 font-bold focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm`}
               >
                 <option
                   disabled={team !== ''}
@@ -356,11 +376,26 @@ export default function Match({ params, data }: Props) {
 
             <div className="w-full ">
               <button
-              onClick={() => enterContestHandler(team,amount)}
-                disabled={!team || !HelperVar}
-                className={` text-white ${HelperVar ? "bg-green-500" : "bg-red-800 cursor-not-allowed tracking-wider" } ${!team ?"cursor-not-allowed":'' } font-bold   w-full px-7 py-2`}
+                onClick={() => enterContestHandler(team, amount)}
+                disabled={!team || !HelperVar || loadinggg}
+                className={` text-white ${
+                  HelperVar
+                    ? 'bg-green-500'
+                    : 'bg-red-800 cursor-not-allowed tracking-wider'
+                } ${
+                  !team || loadinggg ? 'cursor-not-allowed' : ''
+                } font-bold hover:opacity-80  w-full px-7 py-2`}
               >
-                {HelperVar ? 'Join Now' : 'Closed'}
+                {loadinggg ? (
+                  <div className="flex items-center justify-center opacity-70">
+                    <div className="h-3 w-3 border-t-transparent border-solid animate-spin rounded-full border-white border-2"></div>
+                    <div className="ml-2"> Processing... </div>
+                  </div>
+                ) : HelperVar ? (
+                  'Join Now'
+                ) : (
+                  'Closed'
+                )}
               </button>
             </div>
           </div>
