@@ -4,7 +4,7 @@ import React, { useContext } from 'react';
 
 import { useCollection } from 'react-firebase-hooks/firestore';
 import { collection, doc, where, query } from 'firebase/firestore';
-import { useContractRead, useAddress } from '@thirdweb-dev/react';
+import { useContractRead, useAddress, ConnectWallet } from '@thirdweb-dev/react';
 import { toast } from 'react-toastify';
 
 import { db } from '../../../../firebase';
@@ -23,7 +23,21 @@ export default function myMatches({}: Props) {
 
   // console.log(address);
 
-  // if (!address) return <div>No wallet connected</div>;
+  if (!address){
+return (
+  <div className="w-screen h-[70vh] bg-green-200 shadow-lg flex flex-col items-center justify-center">
+    <div
+      className="pb-6 text-xxl font-bold text-white py-4 px-8 text-center 
+             border-b-2 md:border-b-0  hover:bg-transparent"
+    >
+      <ConnectWallet className=" !bg-green-600" />
+    </div>
+    <div className="capitalize font-bold mb-6 text-lg text-gray-700 lg:text-xl sm:px-16 xl:px-48 ">
+      please connect the wallet, to fetch your-matches
+    </div>
+  </div>
+);
+  } 
 
   const contestsRef = collection(db, 'moralis', 'events', 'Entercontests');
 
@@ -52,10 +66,24 @@ export default function myMatches({}: Props) {
       ) : null}
 
       {contests ? (
-        <div className="w-screen flex flex-col bg-purple-100 items-center">
-          {contests.docs.map((doc) => {
-            return <MatchCard matchId={doc?.data()?.matchId} key={doc.id} />;
-          })}
+        <div className="bg-purple-100 mb-20 ">
+          <h2 className="text-4xl  text-end mb-8 pr-12 pt-10  font-bold font-serif text-blue-600">
+            My Matches
+          </h2>
+
+          <div className="w-screen flex flex-col items-center">
+            {contests.docs.map((doc) => {
+              const data = doc?.data();
+              return (
+                <MatchCard
+                  matchId={data?.matchId}
+                  teamAstake={data?.teamA}
+                  teamBstake={data?.teamB}
+                  key={doc.id}
+                />
+              );
+            })}
+          </div>
         </div>
       ) : null}
     </div>

@@ -50,9 +50,9 @@ export default function Profile({}: Props) {
               {' '}
               Connect
             </button>{' '}
-            <button className="text-white py-2 px-4 uppercase rounded bg-gray-700 hover:bg-gray-800 shadow hover:shadow-lg font-medium transition transform hover:-translate-y-0.5">
+            <button className="text-white py-2 px-4 rounded bg-gray-700 hover:bg-gray-800 shadow hover:shadow-lg font-medium transition transform hover:-translate-y-0.5">
               {' '}
-              Message
+              Message us
             </button>{' '}
           </div>{' '}
         </div>{' '}
@@ -61,8 +61,8 @@ export default function Profile({}: Props) {
           <h1 className="text-4xl font-medium text-gray-700">
             Sandeep Reddy, <span className="font-light text-gray-500">25</span>
           </h1>{' '}
-          <p className="font-light text-gray-600 mt-3">Hyderbad, India</p>{' '}
-          <p className="mt-8 text-gray-500">Web Developer</p>{' '}
+          <p className="font-light text-gray-600 mt-3">Hyderbad, India.</p>{' '}
+          <p className="mt-8 text-gray-500">Web Developer.</p>{' '}
         </div>{' '}
         <div className="mt-12 flex flex-col justify-center">
           {' '}
@@ -72,7 +72,7 @@ export default function Profile({}: Props) {
           </p>{' '}
           <button className="text-indigo-500 py-2 px-4  font-medium mt-4">
             {' '}
-            Show more
+            Centralized Profile
           </button>{' '}
         </div>
       </div>

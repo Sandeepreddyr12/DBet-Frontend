@@ -6,12 +6,15 @@ import { useRouter } from 'next/navigation';
 import { useContractRead, useAddress } from '@thirdweb-dev/react';
 import { ethers } from 'ethers';
 import { toast } from 'react-toastify';
+import ReactCountryFlag from 'react-country-flag';
+
 
 import { contestProps } from '../../../Types/types';
 import Timer from '../../miscellaneous/timeCounter/timerlib';
 import { DotLoader } from '../../miscellaneous/loaders/spinners';
 import { Store } from '@/app/context/store';
 import winCalculator from '../../winningsCalculator/winCalculator';
+import { CountryCodes } from '../../miscellaneous/loaders/countryCodes';
 
 interface contestCardProps {
   data: contestProps;
@@ -60,6 +63,12 @@ export default function Card({ data }: contestCardProps) {
     stake2 = team2_Winings.toFixed(2); // gives the predicted returns when we place 1eth/sample-amount on team2
   }
 
+  let HelperVar = true;
+
+  if (status !== 'Yet_to_Start') {
+    HelperVar = false;
+  }
+
   const routeHandler = () => {
     if (address) {
       router.push(`/components/Home/allMatches/${matchId}`);
@@ -73,25 +82,35 @@ export default function Card({ data }: contestCardProps) {
   return (
     <div
       onClick={routeHandler}
-      className="w-[22rem] relative mx-3 my-4 bg-white border border-gray-200 rounded-lg dark:bg-gray-800 dark:border-gray-700 shadow-lg"
+      className="w-[22rem] relative mx-3 my-4 bg-white border border-gray-200 rounded-lg dark:bg-gray-800 dark:border-gray-700 shadow-lg hover:scale-110 cursor-pointer transition delay-100 duration-200 ease-in-out"
     >
-      <div className="h-5 w-max px-3 bg-green-500 rounded-full absolute top-1.5 right-3 hover:opacity-80 cursor-pointer ">
+      <div
+        className={`h-5 w-max px-3 ${
+          HelperVar ? 'bg-green-500' : 'bg-red-800'
+        } rounded-full absolute top-1.5 right-3 hover:opacity-80 cursor-pointer `}
+      >
         <div className="relative">
           <p className="text-xs pt-0.5 text-blue-100 font-semibold text-center align-text-bottom">
-            Live
+            {HelperVar ? 'Live' : 'Closed'}
           </p>
         </div>
       </div>
       <div className="w-full  bg-white rounded-lg p-4 dark:bg-gray-800">
-        <div className="text-cyan-200 text-center "> icc odi worldcup</div>
+        <div className="text-cyan-200 text-center mb-4 uppercase font-mono">
+          {' '}
+          icc odi worldcup
+        </div>
         <dl className="grid grid-cols-2 gap-4 mx-auto text-gray-900 sm:grid-cols-3 dark:text-white">
           <div className=" py-2 px-4 flex flex-col items-center justify-center">
             <div>
-              <Image
-                width="30"
-                height="30"
-                src="https://img.icons8.com/color/96/india.png"
-                alt="india"
+              <ReactCountryFlag
+                countryCode={CountryCodes[teamA]}
+                svg
+                style={{
+                  width: '2em',
+                  height: '2em',
+                }}
+                title={CountryCodes[teamA]}
               />
             </div>
             <dd className="text-gray-500 text-xs dark:text-gray-400">
@@ -101,18 +120,32 @@ export default function Card({ data }: contestCardProps) {
           <div className=" py-2 px-4 flex flex-col items-center justify-center">
             <dt className="mb-2  text-xs">Today</dt>
             <dd className="text-gray-500  text-sm font-bold dark:text-gray-400">
-              <Timer />
+              {HelperVar ? (
+                <Timer />
+              ) : (
+                <span className="text-red-400">{result}</span>
+              )}
             </dd>
           </div>
           <div className=" py-2 px-4 flex flex-col items-center justify-center">
-            <dt className="mb-2 text-sm font-bold">flag</dt>
+            <div>
+              <ReactCountryFlag
+                countryCode={CountryCodes[teamB]}
+                svg
+                style={{
+                  width: '2em',
+                  height: '2em',
+                }}
+                title={CountryCodes[teamB]}
+              />
+            </div>
             <dd className="text-gray-500 text-xs dark:text-gray-400">
               {teamB}
             </dd>
           </div>
           <div className="bg-gray-600 py-2 px-4 shadow-lg rounded-lg flex flex-col items-center justify-center">
             <dt className="mb-2 text-sm font-bold">{stake1}</dt>
-            <dd className="text-gray-500 text-xs dark:text-gray-400">1</dd>
+            <dd className="text-gray-500 text-xs dark:text-gray-400">A</dd>
           </div>
           <div className="bg-gray-600 py-2 px-4 shadow-lg rounded-lg flex flex-col items-center justify-center">
             <dt className="mb-2 text-sm font-bold">90+</dt>
@@ -120,7 +153,7 @@ export default function Card({ data }: contestCardProps) {
           </div>
           <div className="bg-gray-600 py-2 px-4 shadow-lg rounded-lg flex flex-col items-center justify-center">
             <dt className="mb-2 text-sm font-bold">{stake2}</dt>
-            <dd className="text-gray-500 text-xs dark:text-gray-400">2</dd>
+            <dd className="text-gray-500 text-xs dark:text-gray-400">B</dd>
           </div>
         </dl>
       </div>

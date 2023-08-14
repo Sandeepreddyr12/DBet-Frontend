@@ -12,6 +12,8 @@ import { useRouter } from 'next/navigation';
 import { useCollection } from 'react-firebase-hooks/firestore';
 import { collection, doc, where, query } from 'firebase/firestore';
 import { toast } from 'react-toastify';
+import ReactCountryFlag from 'react-country-flag';
+
 
 import { contestProps } from '../../../../Types/types';
 import { db } from '../../../../../../firebase';
@@ -21,6 +23,8 @@ import {
   MainSpinner,
 } from '../../../miscellaneous/loaders/spinners';
 import winCalculator from '../../../winningsCalculator/winCalculator';
+import { CountryCodes } from '@/app/components/miscellaneous/loaders/countryCodes';
+
 
 type Props = {
   params: { slug: number };
@@ -147,7 +151,6 @@ export default function Match({ params, data }: Props) {
     }
   };
 
-  console.log(loadinggg, 'writefunction');
 
   // if (!address) {
   //   console.log('aaaaa');
@@ -182,6 +185,17 @@ export default function Match({ params, data }: Props) {
                 // height={50}
                 style={{ objectFit: 'contain' }}
               /> */}
+              <ReactCountryFlag
+                countryCode={CountryCodes[matchDetails?.teamA]}
+                svg
+                style={{
+                  width: '100%',
+                  height: '100%',
+                  objectFit: 'cover',
+                  // objectPosition: '100% 10%',
+                }}
+                title={CountryCodes[matchDetails?.teamA]}
+              />
             </div>
             <div className="col-span-4 col-start-5 bg-green-500 w-full h-full">
               {/* <Image
@@ -189,6 +203,16 @@ export default function Match({ params, data }: Props) {
             src={data?.category?.image}
             alt={data?.category?.name}
           />  */}
+              <ReactCountryFlag
+                countryCode={CountryCodes[matchDetails?.teamB]}
+                svg
+                style={{
+                  width: '100%',
+                  height: '100%',
+                  objectFit: 'cover',
+                }}
+                title={CountryCodes[matchDetails?.teamB]}
+              />
             </div>
             <div className="col-span-3 row-start-2">{stake1}</div>
             <div className="col-span-3 col-start-6 row-start-2">{stake2}</div>
