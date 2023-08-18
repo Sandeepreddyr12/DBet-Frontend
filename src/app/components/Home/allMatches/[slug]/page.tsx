@@ -14,7 +14,6 @@ import { collection, doc, where, query } from 'firebase/firestore';
 import { toast } from 'react-toastify';
 import ReactCountryFlag from 'react-country-flag';
 
-
 import { contestProps } from '../../../../Types/types';
 import { db } from '../../../../../../firebase';
 import { Store } from '@/app/context/store';
@@ -23,8 +22,7 @@ import {
   MainSpinner,
 } from '../../../miscellaneous/loaders/spinners';
 import winCalculator from '../../../winningsCalculator/winCalculator';
-import { CountryCodes } from '@/app/components/miscellaneous/loaders/countryCodes';
-
+import { CountryCodes } from '@/app/components/miscellaneous/countryCodes';
 
 type Props = {
   params: { slug: number };
@@ -63,11 +61,14 @@ export default function Match({ params, data }: Props) {
     data: playerStake,
     isLoading,
     error: playerStakError,
-  } = useContractRead(sportsPredictorContract, 'getPlayerStake', [
-    params?.slug,
-  ]);
+  } = useContractRead(
+    sportsPredictorContract,
+    'getPlayerStake',
+    [params?.slug],
+    { from: address }
+  );
 
-  // console.log(playerStake,"playerstake")
+  // console.log(playerStake, 'playerstake');
 
   let stake1: any = '--';
   let stake2: any = '--';
@@ -151,28 +152,21 @@ export default function Match({ params, data }: Props) {
     }
   };
 
-
-  // if (!address) {
-  //   console.log('aaaaa');
-  //   router.back();
-  //   // return;
-  // }
-
-  // useEffect(() => {
-  //   if (!address) {
-  //     router.back();
-  // toast.error('Please Connect the wallet', {
-  //   position: 'top-right',
-  // });
-  //     // return;
-  //   }
-  // }, [address]);
+  useEffect(() => {
+    if (!address) {
+      router.back();
+      toast.error('wallet disconnected, please connect', {
+        position: 'top-right',
+      });
+      // return;
+    }
+  }, [address]);
 
   // console.log(amount1, amount2, 'outside slug');
   // console.log('slug-in-teamWinnigs', team1_Winings, team2_Winings);
 
   return (
-    <div className="w-screen pt-32 h-screen m-auto flex justify-center items-center bg-yellow-50">
+    <div className="w-screen mb-12 border-b-lime-200 pt-32 h-screen m-auto flex justify-center items-center bg-yellow-50">
       <div className=" w-10/12  flex justify-between items-center  space-x-10 flex-wrap sm:flex-nowrap">
         <div className="product-img w-1/2 min-w-min h-[30rem] bg-green-100 flex">
           <div className="w-full font-bold justify-items-center grid grid-cols-8 grid-rows-5 gap-1 text-center  items-center">

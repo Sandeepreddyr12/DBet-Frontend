@@ -5,7 +5,7 @@
 }
 
 .navbar {
-  height: 5rem;
+  height: max-content;
   width: 100%;
   display: grid;
   place-items: center;
@@ -19,6 +19,7 @@
   display: flex;
 
   background: rgb(166, 234, 166);
+  
 
   list-style: none;
 
@@ -36,6 +37,8 @@
   width: calc(100% / 2);
 
   background: lightgreen;
+      /* backdrop-filter: blur(30px); */
+
 
   position: absolute;
 

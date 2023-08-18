@@ -40,7 +40,7 @@ export default function Matches() {
           ))}
         </div>
       ) : null}
-      {contests ? (
+      {!contests?.empty && contests ? (
         <div className="w-full justify-center flex flex-wrap items-center">
           {contests.docs.map((doc) => {
             //  console.log(doc.data());
@@ -58,7 +58,11 @@ export default function Matches() {
             return <Card key={doc.id} data={contest} />;
           })}
         </div>
-      ) : null}
+      ) : (
+        <div className=" w-screen h-[70vh] capitalize bg-green-200 text-2xl font-mono font-extrabold flex flex-col items-center justify-center">
+          No contests availble
+        </div>
+      )}
     </div>
   );
 }

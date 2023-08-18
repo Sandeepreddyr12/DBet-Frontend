@@ -8,13 +8,12 @@ import { ethers } from 'ethers';
 import { toast } from 'react-toastify';
 import ReactCountryFlag from 'react-country-flag';
 
-
 import { contestProps } from '../../../Types/types';
 import Timer from '../../miscellaneous/timeCounter/timerlib';
 import { DotLoader } from '../../miscellaneous/loaders/spinners';
 import { Store } from '@/app/context/store';
 import winCalculator from '../../winningsCalculator/winCalculator';
-import { CountryCodes } from '../../miscellaneous/loaders/countryCodes';
+import { CountryCodes } from '../../miscellaneous/countryCodes';
 
 interface contestCardProps {
   data: contestProps;
@@ -82,7 +81,7 @@ export default function Card({ data }: contestCardProps) {
   return (
     <div
       onClick={routeHandler}
-      className="w-[22rem] relative mx-3 my-4 bg-white border border-gray-200 rounded-lg dark:bg-gray-800 dark:border-gray-700 shadow-lg hover:scale-110 cursor-pointer transition delay-100 duration-200 ease-in-out"
+      className="w-[22rem] relative mx-3 my-4  border  rounded-lg border-gray-700 shadow-lg hover:scale-110 cursor-pointer transition delay-100 duration-200 ease-in-out"
     >
       <div
         className={`h-5 w-max px-3 ${
@@ -95,12 +94,12 @@ export default function Card({ data }: contestCardProps) {
           </p>
         </div>
       </div>
-      <div className="w-full  bg-white rounded-lg p-4 dark:bg-gray-800">
+      <div className="w-full   rounded-lg p-4 bg-gray-800">
         <div className="text-cyan-200 text-center mb-4 uppercase font-mono">
           {' '}
           icc odi worldcup
         </div>
-        <dl className="grid grid-cols-2 gap-4 mx-auto text-gray-900 sm:grid-cols-3 dark:text-white">
+        <dl className="grid grid-cols-2 gap-4 mx-auto  sm:grid-cols-3 text-white">
           <div className=" py-2 px-4 flex flex-col items-center justify-center">
             <div>
               <ReactCountryFlag
@@ -113,13 +112,13 @@ export default function Card({ data }: contestCardProps) {
                 title={CountryCodes[teamA]}
               />
             </div>
-            <dd className="text-gray-500 text-xs dark:text-gray-400">
+            <dd className=" text-xs text-gray-400">
               {teamA}
             </dd>
           </div>
           <div className=" py-2 px-4 flex flex-col items-center justify-center">
             <dt className="mb-2  text-xs">Today</dt>
-            <dd className="text-gray-500  text-sm font-bold dark:text-gray-400">
+            <dd className=" text-sm font-bold text-gray-400">
               {HelperVar ? (
                 <Timer />
               ) : (
@@ -139,21 +138,21 @@ export default function Card({ data }: contestCardProps) {
                 title={CountryCodes[teamB]}
               />
             </div>
-            <dd className="text-gray-500 text-xs dark:text-gray-400">
+            <dd className=" text-xs text-gray-400">
               {teamB}
             </dd>
           </div>
           <div className="bg-gray-600 py-2 px-4 shadow-lg rounded-lg flex flex-col items-center justify-center">
             <dt className="mb-2 text-sm font-bold">{stake1}</dt>
-            <dd className="text-gray-500 text-xs dark:text-gray-400">A</dd>
+        <dd className=" text-xs text-gray-400">A</dd>
           </div>
           <div className="bg-gray-600 py-2 px-4 shadow-lg rounded-lg flex flex-col items-center justify-center">
             <dt className="mb-2 text-sm font-bold">90+</dt>
-            <dd className="text-gray-500 text-xs dark:text-gray-400">X</dd>
+        <dd className=" text-xs text-gray-400">X</dd>
           </div>
           <div className="bg-gray-600 py-2 px-4 shadow-lg rounded-lg flex flex-col items-center justify-center">
             <dt className="mb-2 text-sm font-bold">{stake2}</dt>
-            <dd className="text-gray-500 text-xs dark:text-gray-400">B</dd>
+        <dd className=" text-xs text-gray-400">B</dd>
           </div>
         </dl>
       </div>

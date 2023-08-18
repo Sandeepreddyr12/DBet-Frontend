@@ -9,6 +9,7 @@ import './globals.css';
 import NavBar from './components/navbar/Navbar';
 import { thirdWeb_clientId } from '@/constants/ContractAdresses';
 import StoreProvider from './context/store';
+import Footer from './components/footer/Footer';
 
 export const metadata = {
   title: 'Decent-Bet',
@@ -21,7 +22,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en">
+    <html>
       <body>
         <ToastContainer
           position="top-right"
@@ -41,6 +42,7 @@ export default function RootLayout({
               <NavBar />
             </header>
             {children}
+            <Footer/>
           </StoreProvider>
         </ThirdwebProvider>
       </body>

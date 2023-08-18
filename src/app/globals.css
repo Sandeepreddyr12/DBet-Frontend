@@ -159,3 +159,22 @@ body {
   background: rgba(255, 255, 255, 0.6);
   filter: blur(750px);
 }
+
+
+
+
+        
+        ::-webkit-scrollbar {
+            width: 10px;
+        }
+        
+        ::-webkit-scrollbar-track {
+            border-radius: 8px;
+            background-color: #c5e1c4;
+            border: 1px solid #cacaca;
+        }
+        
+        ::-webkit-scrollbar-thumb {
+            border-radius: 8px;
+            background-color: #6fc380;
+        }

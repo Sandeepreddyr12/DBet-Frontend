@@ -7,20 +7,20 @@ export default function winCalculator(
   playerStake_tA : number = 0,
   playerStake_tB : number = 0,
 ) {
-  // console.log(
-  //   'calcu--',
-  //   sampleAmount1,
-  //   sampleAmount2,
-  //   teamA_stake,
-  //   teamB_stake
-  // );
+  console.log(
+    'calcu--',
+    sampleAmount1,
+    sampleAmount2,
+    teamA_stake,
+    teamB_stake
+  );
 
   //below formula gives the predicted winnings/returns for every buck/sample-amount you placed on each team.
 
   let team1_Winings = sampleAmount1;
   let team2_Winings = sampleAmount2;
 
-  if (sampleAmount1 * (teamB_stake + sampleAmount2) !== 0) {
+  if ((sampleAmount1 + playerStake_tA) * (teamB_stake + sampleAmount2) !== 0) {
     team1_Winings =
       ((sampleAmount1 + playerStake_tA) * (teamB_stake + sampleAmount2)) /
         (teamA_stake + sampleAmount1) +
@@ -28,7 +28,7 @@ export default function winCalculator(
       playerStake_tA;
   }
 
-  if (sampleAmount2 * (teamA_stake + sampleAmount1) !== 0) {
+  if ((sampleAmount2 + playerStake_tB) * (teamA_stake + sampleAmount1) !== 0) {
     team2_Winings =
       ((sampleAmount2 + playerStake_tB) * (teamA_stake + sampleAmount1)) /
         (teamB_stake + sampleAmount2) +

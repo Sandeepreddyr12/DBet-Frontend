@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
@@ -11,6 +11,7 @@ import DecentBet_logo from '../../../../public/assets/DecentBet_logo.png';
 
 function Navbar() {
   const currentRoute = usePathname();
+  const [bgColor, setBgColor] = useState<boolean>(false);
 
   let currentClass = '';
 
@@ -19,13 +20,40 @@ function Navbar() {
   } else if (currentRoute == '/components/myMatches') {
     currentClass = 'myMatches';
   }
+
+  //navbar scroll changeBackground function
+  const changeBackground = () => {
+    // console.log(window.scrollY);
+    if (window.scrollY >= 60) {
+      setBgColor(true);
+    } else {
+      setBgColor(false);
+    }
+  };
+
+  useEffect(() => {
+    // changeBackground();
+    // adding the event when scroll change background
+    window.addEventListener('scroll', changeBackground);
+
+    return () => {
+      window.removeEventListener('scroll', changeBackground);
+    };
+  }, []);
+
   return (
-    <nav className="w-full fixed top-0 left-0 right-0 z-10 bg-gradient-to-b from-black to-transparent">
-      <div className="justify-between px-4 mx-auto lg:max-w-7xl md:items-center md:flex md:px-8">
-        <div className="min-w-max flex items-center justify-between py-3">
+    <nav
+      className={`w-full fixed top-0 left-0 right-0 z-10 ${
+        bgColor
+          ? ' backdrop-blur-[80px] '
+          : 'bg-gradient-to-b from-black to-transparent'
+      } transition ease-out delay-150 duration-200`}
+    >
+      <div className="justify-between items-center px-4  mx-auto mt-2 lg:max-w-7xl md:items-center md:flex md:px-8">
+        <div className={`min-w-max ${bgColor && 'bg-green-300 rounded-md'} `}>
           {/* LOGO */}
           <Link href="/">
-            <Image src={DecentBet_logo} alt="Logo" width={120} height={150} />
+            <Image src={DecentBet_logo} alt="Logo" width={180} height={120} />
           </Link>
         </div>
 
@@ -53,10 +81,9 @@ function Navbar() {
         </div>
 
         <div
-          className="pb-6 text-xl text-white py-2 px-6 text-center 
-             border-b-2 md:border-b-0  hover:bg-purple-600  border-purple-900  md:hover:text-purple-600 md:hover:bg-transparent"
+          className="pb-4  pt-2   px-6 text-center"
         >
-          <ConnectWallet className=" !bg-green-600" />
+          <ConnectWallet className=" !bg-green-300 !font-bold" />
         </div>
       </div>
     </nav>
