@@ -36,7 +36,7 @@
   height: 2.8rem;
   width: calc(100% / 2);
 
-  background: lightgreen;
+  background: rgb(128, 240, 128);
       /* backdrop-filter: blur(30px); */
 
 

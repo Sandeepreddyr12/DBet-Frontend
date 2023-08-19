@@ -47,7 +47,7 @@ function Navbar() {
         bgColor
           ? ' backdrop-blur-[80px] '
           : 'bg-gradient-to-b from-black to-transparent'
-      } transition ease-out delay-150 duration-200`}
+      } transition ease-out delay-100 duration-150`}
     >
       <div className="justify-between items-center px-4  mx-auto mt-2 lg:max-w-7xl md:items-center md:flex md:px-8">
         <div className={`min-w-max ${bgColor && 'bg-green-300 rounded-md'} `}>
@@ -83,7 +83,7 @@ function Navbar() {
         <div
           className="pb-4  pt-2   px-6 text-center"
         >
-          <ConnectWallet className=" !bg-green-300 !font-bold" />
+          <ConnectWallet className=" !bg-green-400 !font-bold" />
         </div>
       </div>
     </nav>
