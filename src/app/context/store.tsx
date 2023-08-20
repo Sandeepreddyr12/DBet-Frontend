@@ -5,7 +5,7 @@ import { SmartContract, useContract } from '@thirdweb-dev/react';
 import { sportsPredictor_Address } from '@/constants/ContractAdresses';
 import { BaseContract } from 'ethers';
 
-export const Store = createContext();
+export const Store = createContext<SmartContract<BaseContract> | undefined>(undefined);
 
 export default function StoreProvider({
   children,
