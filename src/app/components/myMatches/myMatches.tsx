@@ -28,7 +28,6 @@ export default function myMatches({}: Props) {
   const address = useAddress();
   const router = useRouter();
 
-  // console.log(address);
 
   if (!address) {
     return (
@@ -56,7 +55,6 @@ export default function myMatches({}: Props) {
   // eslint-disable-next-line react-hooks/rules-of-hooks
   const [contests, loading, error] = useCollection(q);
 
-  console.log(contests);
 
   if (error) {
     toast.error('error occured, while fetching matches ', {

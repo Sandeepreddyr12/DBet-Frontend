@@ -68,7 +68,6 @@ export default function Match({ params, data }: Props) {
     { from: address }
   );
 
-  // console.log(playerStake, 'playerstake');
 
   let stake1: any = '--';
   let stake2: any = '--';
@@ -107,7 +106,6 @@ export default function Match({ params, data }: Props) {
       playerStake_teamB
     ));
 
-    // console.log('slug-in-teamWinnigs', team1_Winings, team2_Winings);
 
     stake1 = teamA_stake; // gives the predicted returns when we place 1eth/sample-amount on team1
     stake2 = teamB_stake; // gives the predicted returns when we place 1eth/sample-amount on team2
@@ -140,12 +138,10 @@ export default function Match({ params, data }: Props) {
           value: ethers.utils.parseEther(`${value}`), // send 0.1 native token with the contract call
         },
       });
-      // console.info('contract call successs', data);
       toast.success('entered contest', {
         position: 'top-right',
       });
     } catch (err) {
-      // console.error('contract call failure', err);
       toast.error('contract call failure', {
         position: 'top-right',
       });
@@ -162,8 +158,7 @@ export default function Match({ params, data }: Props) {
     }
   }, [address]);
 
-  // console.log(amount1, amount2, 'outside slug');
-  // console.log('slug-in-teamWinnigs', team1_Winings, team2_Winings);
+  
 
   return (
     <div className="w-screen mb-12 border-b-lime-200 pt-32 h-screen m-auto flex justify-center items-center bg-yellow-50">
@@ -171,14 +166,7 @@ export default function Match({ params, data }: Props) {
         <div className="product-img w-1/2 min-w-min h-[30rem] bg-green-100 flex">
           <div className="w-full font-bold justify-items-center grid grid-cols-8 grid-rows-5 gap-1 text-center  items-center">
             <div className="col-span-4 bg-green-400 w-full h-full">
-              {/* <Image
-                src="https://img.icons8.com/color/96/india.png"
-                alt="india"
-                fill
-                // width={200}
-                // height={50}
-                style={{ objectFit: 'contain' }}
-              /> */}
+              
               <ReactCountryFlag
                 countryCode={CountryCodes[matchDetails?.teamA]}
                 svg

@@ -6,6 +6,7 @@ import {
   useContractWrite,
 } from '@thirdweb-dev/react';
 import { ethers } from 'ethers';
+import { toast } from 'react-toastify';
 
 import { Store } from '@/app/context/store';
 
@@ -24,7 +25,6 @@ export default function Balance({}: Props) {
     { from: address }
   );
 
-
   // if(!isLoading){
   //     setWinnings(ethers.utils.formatEther(`${data || 0}`));
   // }
@@ -37,10 +37,29 @@ export default function Balance({}: Props) {
   const FetchBalanceHandler = async () => {
     try {
       const data = await fetchBalance({ args: [] });
-      console.info('contract call successs', data);
       //   setWinnings(ethers.utils.formatEther(`${data || 0}`));
+      // console.info('contract call successs', data);
+      toast.info('winnings fetched', {
+        position: 'top-center',
+        autoClose: 2000,
+        hideProgressBar: true,
+        closeOnClick: true,
+        pauseOnHover: false,
+        draggable: true,
+        progress: undefined,
+        theme: 'light',
+      });
     } catch (err) {
-      console.error('contract call failure', err);
+      toast.error('fetching balance, please try again later', {
+        position: 'top-right',
+        autoClose: 3000,
+        hideProgressBar: true,
+        closeOnClick: true,
+        pauseOnHover: false,
+        draggable: true,
+        progress: undefined,
+        theme: 'light',
+      });
     }
   };
 
@@ -50,9 +69,28 @@ export default function Balance({}: Props) {
   const withDrawHandler = async () => {
     try {
       const data = await withDrawWinnigs({ args: [] });
-      console.info('contract call successs', data);
+      toast.info('contract call successs ', {
+        position: 'top-center',
+        autoClose: 2000,
+        hideProgressBar: true,
+        closeOnClick: true,
+        pauseOnHover: false,
+        draggable: true,
+        progress: undefined,
+        theme: 'light',
+      });
     } catch (err) {
-      console.error('contract call failure', err);
+      // console.error('contract call failure', err);
+      toast.error('withdraw operation failed, please try again later', {
+        position: 'top-right',
+        autoClose: 3000,
+        hideProgressBar: true,
+        closeOnClick: true,
+        pauseOnHover: false,
+        draggable: true,
+        progress: undefined,
+        theme: 'light',
+      });
     }
   };
 
@@ -117,7 +155,7 @@ export default function Balance({}: Props) {
           )}
         </button>{' '}
       </div>
-      <div className='text-center font-mono text-gray-500 select-none font-semibold mt-4'>
+      <div className="text-center font-mono text-gray-500 select-none font-semibold mt-4">
         To get the most up-to-date winnings, please fetch before withdrawing.
       </div>
     </div>

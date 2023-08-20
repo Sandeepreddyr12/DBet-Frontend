@@ -38,7 +38,16 @@ export default function Card({ data }: contestCardProps) {
   if (error) {
     stake1 = '--';
     stake2 = '--';
-    console.error('failed to read contract', error);
+    toast.error('failed to read contract', {
+      position: 'top-right',
+      autoClose: 3000,
+      hideProgressBar: true,
+      closeOnClick: true,
+      pauseOnHover: false,
+      draggable: true,
+      progress: undefined,
+      theme: 'light',
+    });
   }
 
   if (isLoading) {

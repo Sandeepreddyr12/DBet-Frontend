@@ -30,7 +30,11 @@ export default function Matches() {
 
   return (
     <div>
-      {error && <strong>Error: {JSON.stringify(error)}</strong>}
+      {error && (
+        <div className=" w-screen h-[70vh] text-red-500 bg-green-200 text-2xl capitalize font-mono font-extrabold flex flex-col items-center justify-center">
+          Error Occured
+        </div>
+      )}
       {loading ? (
         <div className="w-full flex justify-center  flex-wrap items-center">
           {' '}
@@ -43,8 +47,6 @@ export default function Matches() {
       {!contests?.empty && contests ? (
         <div className="w-full justify-center flex flex-wrap items-center">
           {contests.docs.map((doc) => {
-            //  console.log(doc.data());
-
             let docData = doc.data();
 
             const contest = {
