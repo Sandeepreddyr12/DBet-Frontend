@@ -131,6 +131,7 @@ export default function Match({ params, data }: Props) {
   );
 
   const enterContestHandler = async (team: string, value: number) => {
+    const id = toast.loading('⏳ processing your entry...');
     try {
       const data = await enterContest({
         args: [params?.slug, team],
@@ -138,12 +139,21 @@ export default function Match({ params, data }: Props) {
           value: ethers.utils.parseEther(`${value}`), // send 0.1 native token with the contract call
         },
       });
-      toast.success('entered contest', {
-        position: 'top-right',
+      
+      toast.update(id, {
+        render: '🎉 Contest Entered',
+        type: 'success',
+        isLoading: false,
+        autoClose: 5000,
       });
     } catch (err) {
-      toast.error('contract call failure', {
-        position: 'top-right',
+     
+
+      toast.update(id, {
+        render: '😢 Failed to enter the contest',
+        type: 'error',
+        isLoading: false,
+        autoClose: 4000,
       });
     }
   };

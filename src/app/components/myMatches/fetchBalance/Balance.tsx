@@ -35,30 +35,25 @@ export default function Balance({}: Props) {
   );
 
   const FetchBalanceHandler = async () => {
+    const id = toast.loading('⏳ Fetching your Winnings...');
+
     try {
       const data = await fetchBalance({ args: [] });
       //   setWinnings(ethers.utils.formatEther(`${data || 0}`));
       // console.info('contract call successs', data);
-      toast.info('winnings fetched', {
-        position: 'top-center',
-        autoClose: 2000,
-        hideProgressBar: true,
-        closeOnClick: true,
-        pauseOnHover: false,
-        draggable: true,
-        progress: undefined,
-        theme: 'light',
+
+      toast.update(id, {
+        render: '🎉 winnings fetched',
+        type: 'success',
+        isLoading: false,
+        autoClose: 3000,
       });
     } catch (err) {
-      toast.error('fetching balance, please try again later', {
-        position: 'top-right',
-        autoClose: 3000,
-        hideProgressBar: true,
-        closeOnClick: true,
-        pauseOnHover: false,
-        draggable: true,
-        progress: undefined,
-        theme: 'light',
+      toast.update(id, {
+        render: '😢 Failed to Fetch the balance,please try again later',
+        type: 'error',
+        isLoading: false,
+        autoClose: 2000,
       });
     }
   };
@@ -67,29 +62,26 @@ export default function Balance({}: Props) {
     useContractWrite(sportsPredictorContract, 'withDrawWinnigs');
 
   const withDrawHandler = async () => {
+    const id = toast.loading('⏳ processing your Withdrawal request...');
+
     try {
       const data = await withDrawWinnigs({ args: [] });
-      toast.info('contract call successs ', {
-        position: 'top-center',
-        autoClose: 2000,
-        hideProgressBar: true,
-        closeOnClick: true,
-        pauseOnHover: false,
-        draggable: true,
-        progress: undefined,
-        theme: 'light',
+
+      toast.update(id, {
+        render: '🎉 Withdrawal success',
+        type: 'success',
+        isLoading: false,
+        autoClose: 4000,
       });
     } catch (err) {
       // console.error('contract call failure', err);
-      toast.error('withdraw operation failed, please try again later', {
-        position: 'top-right',
+     
+
+      toast.update(id, {
+        render: '😢 Failed to withdraw balance',
+        type: 'error',
+        isLoading: false,
         autoClose: 3000,
-        hideProgressBar: true,
-        closeOnClick: true,
-        pauseOnHover: false,
-        draggable: true,
-        progress: undefined,
-        theme: 'light',
       });
     }
   };
