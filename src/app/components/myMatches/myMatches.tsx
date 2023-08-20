@@ -39,7 +39,7 @@ export default function myMatches({}: Props) {
         >
           <ConnectWallet className=" !bg-green-600" />
         </div>
-        <div className="capitalize font-bold mb-6 text-lg text-gray-700 lg:text-xl sm:px-16 xl:px-48 ">
+        <div className="capitalize font-mono font-bold mb-6 text-lg text-gray-700 lg:text-xl sm:px-16 xl:px-48 ">
           please connect the wallet, to fetch your-matches
         </div>
       </div>
