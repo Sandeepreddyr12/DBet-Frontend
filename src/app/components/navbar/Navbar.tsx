@@ -82,7 +82,7 @@ function Navbar() {
         <div
           className="pb-4  pt-2   px-6 text-center"
         >
-          <ConnectWallet className=" !bg-green-400 !font-bold" />
+          <ConnectWallet className=" !bg-green-400 !font-bold " />
         </div>
       </div>
     </nav>

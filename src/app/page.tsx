@@ -1,6 +1,12 @@
 'use client';
 
-import MyMatches from "./components/myMatches/page";
+import { useEffect } from 'react';
+import { useNetworkMismatch, useSwitchChain } from '@thirdweb-dev/react';
+import { toast } from 'react-toastify';
+import { Sepolia } from '@thirdweb-dev/chains';
+
+
+import MyMatches from './components/myMatches/page';
 
 // import Image from 'next/image';
 // // import Cards from './components/Home/allMatches/matches';
@@ -15,6 +21,29 @@ import MyMatches from "./components/myMatches/page";
 import HomePage from './components/Home/page';
 
 export default function Home() {
+  const isMismatched = useNetworkMismatch();
+  const switchChain = useSwitchChain();
+
+  if (isMismatched) {
+    toast.warn('"Network Mismatch", please switch to "Sepolia" testnet', {
+      position: 'top-center',
+      autoClose: 5000,
+      hideProgressBar: true,
+      closeOnClick: true,
+      pauseOnHover: false,
+      draggable: true,
+      progress: undefined,
+      theme: 'light',
+    });
+  }
+
+  useEffect(() => {
+   if(isMismatched){
+switchChain(Sepolia.chainId);
+   }
+  }, [isMismatched])
+  
+
   return (
     <div>
       {/* <Navbar /> */}
