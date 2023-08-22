@@ -4,6 +4,13 @@ import Countdown, { CountdownRenderProps } from 'react-countdown';
 export default function Timer({ timeStamp }: number) {
   const Completionist = () => <span>Time Up!</span>;
 
+  // just faking here for user experence
+  //timeStamp * 1000 + 2.1e6 is original block stamp
+  let timer =
+    timeStamp * 1000 + 2.1e6 > Date.now()
+      ? timeStamp * 1000 + 2.1e6
+      : Date.now() + 600000;
+
   const renderer = ({
     days,
     hours,
@@ -57,7 +64,7 @@ export default function Timer({ timeStamp }: number) {
   };
   return (
     <div className="w-full">
-      <Countdown date={timeStamp * 1000 + 2.1e+6} renderer={renderer} />
+      <Countdown date={timer} renderer={renderer} />
     </div>
   );
 }

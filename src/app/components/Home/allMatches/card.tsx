@@ -126,7 +126,7 @@ export default function Card({ data }: contestCardProps) {
             </dd>
           </div>
           <div className=" py-2 px-4 flex flex-col items-center justify-center">
-            <dt className="mb-2  text-xs">Today</dt>
+            <dt className="mb-2  text-xs">Ends in</dt>
             <dd className=" text-sm font-bold text-gray-400">
               {HelperVar ? (
                 <Timer timeStamp = {timeStamp} />
