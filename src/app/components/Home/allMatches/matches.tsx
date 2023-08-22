@@ -49,12 +49,14 @@ export default function Matches() {
           {contests.docs.map((doc) => {
             let docData = doc.data();
 
+
             const contest = {
               teamA: docData.teamA,
               teamB: docData.teamB,
               status: docData.status,
               result: docData.contestResult,
               matchId: docData.matchId,
+              timeStamp: docData.blockTimestamp,
             };
 
             return <Card key={doc.id} data={contest} />;
