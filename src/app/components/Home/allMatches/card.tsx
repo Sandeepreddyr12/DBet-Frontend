@@ -24,7 +24,7 @@ export default function Card({ data }: contestCardProps) {
   const address = useAddress();
   const router = useRouter();
 
-  const { teamA, teamB, status, result, matchId } = data;
+  const { teamA, teamB, status, result, matchId,timeStamp } = data;
 
   const {
     data: TeamStake,
@@ -129,7 +129,7 @@ export default function Card({ data }: contestCardProps) {
             <dt className="mb-2  text-xs">Today</dt>
             <dd className=" text-sm font-bold text-gray-400">
               {HelperVar ? (
-                <Timer />
+                <Timer timeStamp = {timeStamp} />
               ) : (
                 <span className="text-red-400">{result}</span>
               )}

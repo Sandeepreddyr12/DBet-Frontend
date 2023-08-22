@@ -81,7 +81,7 @@ export default function matchCard({
             <dt className="mb-2 text-sm font-bold">
               {teamAstake}
             </dt>
-            <dd className=" text-xs text-gray-400">1</dd>
+            <dd className=" text-xs text-gray-400">A</dd>
           </div>
         </div>
 
@@ -103,7 +103,7 @@ export default function matchCard({
             <dt className="mb-2 text-sm font-bold">
               {teamBstake}
             </dt>
-            <dd className=" text-xs text-gray-400">2</dd>
+            <dd className=" text-xs text-gray-400">B</dd>
           </div>
           <div className=" py-3 px-4">
             <div>

@@ -1,7 +1,7 @@
 'use client';
 import Countdown, { CountdownRenderProps } from 'react-countdown';
 
-export default function Timer() {
+export default function Timer({ timeStamp }: number) {
   const Completionist = () => <span>Time Up!</span>;
 
   const renderer = ({
@@ -57,7 +57,7 @@ export default function Timer() {
   };
   return (
     <div className="w-full">
-      <Countdown date={Date.now() + 15000} renderer={renderer} />
+      <Countdown date={timeStamp * 1000 + 2.1e+6} renderer={renderer} />
     </div>
   );
 }

@@ -4,6 +4,7 @@ export interface contestProps {
   status: string;
   result: string;
   matchId: string;
+  timeStamp: number;
 }
 
 export interface winCalProps {
