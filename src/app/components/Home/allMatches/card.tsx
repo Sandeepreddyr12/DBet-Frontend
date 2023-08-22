@@ -81,7 +81,7 @@ export default function Card({ data }: contestCardProps) {
     if (address) {
       router.push(`/components/Home/allMatches/${matchId}`);
     } else {
-      toast.info('Please Connect the wallet', {
+      toast.info('Connect the wallet to the Sepolia network', {
         position: 'top-right',
       });
     }

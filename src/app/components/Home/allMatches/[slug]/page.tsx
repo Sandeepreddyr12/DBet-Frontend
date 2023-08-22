@@ -161,7 +161,7 @@ export default function Match({ params, data }: Props) {
   useEffect(() => {
     if (!address) {
       router.back();
-      toast.error('wallet disconnected, please connect', {
+      toast.error('wallet disconnected, please connect to sepolia Network', {
         position: 'top-right',
       });
       // return;
