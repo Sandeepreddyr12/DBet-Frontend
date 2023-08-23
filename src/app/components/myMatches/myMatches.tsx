@@ -20,6 +20,7 @@ import MatchCard from './matchCard';
 import { Store } from '@/app/context/store';
 import { MainSpinner } from '../miscellaneous/loaders/spinners';
 import Balance from './fetchBalance/Balance';
+import Matches from '../Home/allMatches/matches';
 
 type Props = {};
 
@@ -73,9 +74,15 @@ export default function myMatches({}: Props) {
       {!contests?.empty && contests ? (
         <div className="bg-purple-100 mb-20 ">
           <Balance />
-          <h2 className="text-4xl  text-end mb-8 pr-12 pt-10  font-bold font-serif text-blue-600">
-            My Matches
-          </h2>
+          <h1 className="text-4xl my-8  text-center pt-10  font-bold font-serif  italic">
+            <span className="underline underline-offset-3 decoration-8 decoration-blue-400 ">
+              My Matches
+            </span>
+          </h1>
+          <div className="text-center font-mono text-gray-500 select-none font-semibold mt-4">
+            The matches are displayed after blocks have been confirmed, so it
+            isn't real-time.
+          </div>
           <div className="w-screen flex flex-col items-center">
             {contests?.docs.map((doc) => {
               const data = doc?.data();
