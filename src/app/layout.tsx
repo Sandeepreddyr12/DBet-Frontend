@@ -7,7 +7,6 @@ import { ToastContainer } from 'react-toastify';
 
 import './globals.css';
 import NavBar from './components/navbar/Navbar';
-import { thirdWeb_clientId } from '@/constants/ContractAdresses';
 import StoreProvider from './context/store';
 import Footer from './components/footer/Footer';
 
@@ -36,13 +35,16 @@ export default function RootLayout({
           pauseOnHover={false}
           theme="light"
         />
-        <ThirdwebProvider activeChain={Sepolia} clientId={thirdWeb_clientId}>
+        <ThirdwebProvider
+          activeChain={Sepolia}
+          clientId={process.env.NEXT_PUBLIC_THIRDWEB_CLIENTID}
+        >
           <StoreProvider>
             <header>
               <NavBar />
             </header>
             {children}
-            <Footer/>
+            <Footer />
           </StoreProvider>
         </ThirdwebProvider>
       </body>

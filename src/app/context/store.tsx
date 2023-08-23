@@ -2,7 +2,6 @@
 
 import { createContext } from 'react';
 import { SmartContract, useContract } from '@thirdweb-dev/react';
-import { sportsPredictor_Address } from '@/constants/ContractAdresses';
 import { BaseContract } from 'ethers';
 
 export const Store = createContext<SmartContract<BaseContract> | undefined>(undefined);
@@ -17,7 +16,7 @@ export default function StoreProvider({
     isLoading,
     error: errors,
     // eslint-disable-next-line react-hooks/rules-of-hooks
-  } = useContract(sportsPredictor_Address);
+  } = useContract(process.env.NEXT_PUBLIC_SPORTSPREDICTOR_ADDRESS);
 
   return <Store.Provider value={contract}>{children}</Store.Provider>;
 }
