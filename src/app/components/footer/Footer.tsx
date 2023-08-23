@@ -14,6 +14,7 @@ export default function Footer() {
               {/* LOGO */}
               <Link href="/">
                 <Image
+                  priority={false}
                   src={DecentBet_logo}
                   alt="Logo"
                   width={250}

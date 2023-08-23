@@ -52,7 +52,13 @@ function Navbar() {
         <div className={`min-w-max ${bgColor && 'bg-green-300 rounded-md'} `}>
           {/* LOGO */}
           <Link href="/">
-            <Image src={DecentBet_logo} alt="Logo" width={180} height={120} />
+            <Image
+              src={DecentBet_logo}
+              priority={false}
+              alt="Logo"
+              width={180}
+              height={120}
+            />
           </Link>
         </div>
 
@@ -79,9 +85,7 @@ function Navbar() {
           </ul>
         </div>
 
-        <div
-          className="pb-4  pt-2   px-6 text-center"
-        >
+        <div className="pb-4  pt-2   px-6 text-center">
           <ConnectWallet className=" !bg-green-400 !font-bold " />
         </div>
       </div>
