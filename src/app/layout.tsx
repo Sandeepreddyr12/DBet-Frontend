@@ -10,10 +10,10 @@ import NavBar from './components/navbar/Navbar';
 import StoreProvider from './context/store';
 import Footer from './components/footer/Footer';
 
-export const metadata = {
-  title: 'Decent-Bet',
-  description: 'A Decentralized Sports Predictor',
-};
+// export const metadata = {
+//   title: 'Decent-Bet',
+//   description: 'A Decentralized Sports Predictor',
+// };
 
 export default function RootLayout({
   children,
