@@ -26,10 +26,10 @@ import { CountryCodes } from '@/app/components/miscellaneous/countryCodes';
 
 type Props = {
   params: { slug: number };
-  data: contestProps;
+  
 };
 
-export default function Match({ params, data }: Props) {
+export default function Match({ params}: Props) {
   const sportsPredictorContract = useContext(Store);
   const address = useAddress();
   const router = useRouter();
