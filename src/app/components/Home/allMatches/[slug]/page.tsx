@@ -160,8 +160,8 @@ export default function Match({ params}: Props) {
       toast.error('wallet disconnected, please connect to sepolia Network', {
         position: 'top-right',
       });
-      // return;
     }
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [address]);
 
   return (

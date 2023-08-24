@@ -1,4 +1,8 @@
-export const CountryCodes = {
+interface IObjectKeys {
+  [key: string]: string;
+}
+
+export const CountryCodes:IObjectKeys = {
   India: 'IN',
   Australia: 'AU',
   England: 'GB',

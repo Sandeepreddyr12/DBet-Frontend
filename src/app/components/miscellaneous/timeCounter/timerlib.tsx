@@ -1,7 +1,11 @@
 'use client';
 import Countdown, { CountdownRenderProps } from 'react-countdown';
 
-export default function Timer({ timeStamp }: number) {
+type props = {
+  timeStamp:number,
+};
+
+export default function Timer({ timeStamp }: props) {
   const Completionist = () => <span>Time Up!</span>;
 
   // just faking here for user experence
