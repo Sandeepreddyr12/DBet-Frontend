@@ -3,7 +3,7 @@
 import { useState } from 'react';
 import Lottie from 'lottie-react';
 import ChatBox from './chatBox';
-import chatBot from '../../../public/lottieAnime/chatBot.json';
+import chatBot from '../../../../public/assets/lottieAnime/chatBot.json';
 
 
 export default function ChatButton() {

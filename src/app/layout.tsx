@@ -9,6 +9,7 @@ import './globals.css';
 import NavBar from './components/navbar/Navbar';
 import StoreProvider from './context/store';
 import Footer from './components/footer/Footer';
+import ChatButton from './components/chatBot/chatButton';
 
 // export const metadata = {
 //   title: 'Decent-Bet',
@@ -43,6 +44,7 @@ export default function RootLayout({
             <header>
               <NavBar />
             </header>
+            <ChatButton />
             {children}
             <Footer />
           </StoreProvider>

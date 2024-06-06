@@ -4,7 +4,8 @@
   "private": true,
   "scripts": {
     "dev": "next dev",
-    "build": "next build",
+    "build": "npm run generate && next build",
+    "generate": "npx ts-node ./scripts/generate.ts",
     "start": "next start",
     "lint": "next lint"
   },
@@ -23,6 +24,7 @@
     "@upstash/redis": "^1.30.0",
     "ai": "^3.0.35",
     "autoprefixer": "10.4.14",
+    "cheerio": "^1.0.0-rc.12",
     "clsx": "^2.1.1",
     "dotenv": "^16.4.5",
     "eslint": "8.42.0",
@@ -34,6 +36,7 @@
     "next": "13.4.6",
     "openai": "^4.39.0",
     "postcss": "8.4.24",
+    "puppeteer": "^19.11.1",
     "react": "18.2.0",
     "react-countdown": "^2.3.5",
     "react-country-flag": "^3.1.0",

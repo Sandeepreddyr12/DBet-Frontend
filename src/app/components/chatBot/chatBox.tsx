@@ -36,6 +36,9 @@ export default function ChatBox({ open, onClose }: AIChatBoxProps) {
     },
   });
 
+      console.error('chatbot Error:---', error);
+
+
   const inputRef = useRef<HTMLInputElement>(null);
   const scrollRef = useRef<HTMLDivElement>(null);
   const modalRef = useRef<HTMLDivElement>(null);
