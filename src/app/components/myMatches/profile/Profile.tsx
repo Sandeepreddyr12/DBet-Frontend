@@ -38,7 +38,7 @@ export default function Profile({}: Props) {
               >
                 {' '}
                 <path
-                  fill-rule="evenodd"
+                  fillRule="evenodd"
                   d="M10 9a3 3 0 100-6 3 3 0 000 6zm-7 9a7 7 0 1114 0H3z"
                   clip-rule="evenodd"
                 />
@@ -67,7 +67,9 @@ export default function Profile({}: Props) {
         <div className="mt-12 flex flex-col justify-center">
           {' '}
           <p className="text-gray-600 text-center font-light lg:px-16 capitalize">
-            planned centralized profile page, which stores reminders and liked/wishlist matches (`it let you notified when match goes live`) in a centralized database. <br/>
+            planned centralized profile page, which stores reminders and
+            liked/wishlist matches (`it let you notified when match goes live`)
+            in a centralized database. <br />
             feel to free to implement!!!!
           </p>{' '}
           <button className="text-indigo-500 py-2 px-4  font-medium mt-4">
