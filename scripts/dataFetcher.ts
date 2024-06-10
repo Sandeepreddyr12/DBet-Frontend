@@ -43,7 +43,7 @@ async function getDocument() {
       allData.push(doc.data());
     });
     fs.writeFile(
-      'split-documents.json',
+      `${__dirname}/split-documents.json`,
       JSON.stringify(allData, null, 2),
       (err: any) => {
         if (err) {
