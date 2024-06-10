@@ -13,7 +13,7 @@ import * as cheerio from 'cheerio';
 import * as puppeteer from 'puppeteer';
 import { Document } from 'langchain/document';
 
-const fs = require('fs');
+const fs = require("fs");
 
 async function generateEmbeddings() {
   await Redis.fromEnv().flushdb();
@@ -53,17 +53,13 @@ async function generateEmbeddings() {
 
   // console.log(pageContent);
 
-  fs.writeFile(
-    'split-documents1.json',
-    JSON.stringify(pageContent, null, 2),
-    (err: any) => {
+  fs.writeFile("split-documents1.json", JSON.stringify(pageContent, null, 2), (err: any) => {
       if (err) {
-        console.error(err);
-        return;
+          console.error(err);
+          return;
       }
-      console.log('Data written to file successfully');
-    }
-  );
+      console.log("Data written to file successfully");
+  });
 
   // Load the HTML content into cheerio
   const $ = cheerio.load(pageContent);
@@ -85,6 +81,7 @@ async function generateEmbeddings() {
 
   const docs = textContent.replace(/[^\x20-\x7E]+/g, ''); // Remove non-ASCII characters
 
+  
   // Create Document instances
   const documents = [new Document({ pageContent: pageContent })];
 
@@ -95,17 +92,14 @@ async function generateEmbeddings() {
 
   const splitDocuments = await splitter.splitDocuments(documents);
 
-  fs.writeFile(
-    'split-documents.json',
-    JSON.stringify(splitDocuments, null, 2),
-    (err: any) => {
+  fs.writeFile("split-documents.json", JSON.stringify(splitDocuments, null, 2), (err: any) => {
       if (err) {
-        console.error(err);
-        return;
+          console.error(err);
+          return;
       }
-      console.log('Data written to file successfully');
-    }
-  );
+      console.log("Data written to file successfully");
+  });
+
 
   // Process and store embeddings in batches
   const batchSize = 10; // Adjust based on your needs

@@ -6,6 +6,7 @@
     "dev": "next dev",
     "build": "npm run generate && next build",
     "generate": "npx ts-node ./scripts/generate.ts",
+    "datafetch": "npx ts-node ./scripts/dataFetcher.ts",
     "start": "next start",
     "lint": "next lint"
   },
@@ -31,6 +32,7 @@
     "eslint-config-next": "13.4.6",
     "ethers": "^5.7.2",
     "firebase": "^10.0.0",
+    "firebase-admin": "^12.1.1",
     "langchain": "^0.1.36",
     "lottie-react": "^2.4.0",
     "next": "13.4.6",

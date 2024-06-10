@@ -112,9 +112,9 @@ console.log('api requested,dddddddddddddddddddddddddddddd')
     const combineDocsChain = await createStuffDocumentsChain({
       llm: chatModel,
       prompt,
-      documentPrompt: PromptTemplate.fromTemplate(
-        'Page URL: {url}\n\nPage content:\n{page_content}'
-      ),
+      // documentPrompt: PromptTemplate.fromTemplate(
+      //   'Page URL: {url}\n\nPage content:\n{page_content}'
+      // ),
       documentSeparator: '\n--------\n',
     });
 
