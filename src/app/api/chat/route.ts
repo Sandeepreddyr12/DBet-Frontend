@@ -22,10 +22,10 @@ import { createRetrievalChain } from 'langchain/chains/retrieval';
 import https from 'https';
 
 
-// const ratelimit = new Ratelimit({
-//   redis: Redis.fromEnv(),
-//   limiter: Ratelimit.fixedWindow(8, '30s'),
-// });
+const ratelimit = new Ratelimit({
+  redis: Redis.fromEnv(),
+  limiter: Ratelimit.fixedWindow(8, '30s'),
+});
 
 export async function POST(req: NextRequest) {
 
@@ -33,13 +33,13 @@ console.log('api requested,dddddddddddddddddddddddddddddd')
 
   try {
 
-//  const ip = req.ip ?? 'ip';
-//  const { success, remaining } = await ratelimit.limit(ip);
+ const ip = req.ip ?? 'ip';
+ const { success, remaining } = await ratelimit.limit(ip);
 
-//  // block the request if unsuccessfull
-//  if (!success) {
-//    return new Response('Ratelimited!', { status: 429 });
-//  }
+ // block the request if unsuccessfull
+ if (!success) {
+   return new Response('Ratelimited!', { status: 429 });
+ }
 
     const body = await req.json();
     const messages = body.messages;
@@ -99,9 +99,8 @@ console.log('api requested,dddddddddddddddddddddddddddddd')
     const prompt = ChatPromptTemplate.fromMessages([
       [
         'system',
-        "You are a chatbot for a Decentralized betting website. You impersonate the website's owner. " +
+        "You are a chatbot for a Decentralized betting website named DecentBet. You impersonate the website's owner. " +
           "Answer the user's questions based on the below context. " +
-          'Whenever it makes sense, provide links to pages that contain more information about the topic from the given context. ' +
           'Format your messages in markdown format.\n\n' +
           'Context:\n{context}',
       ],

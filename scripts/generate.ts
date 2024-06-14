@@ -2,16 +2,16 @@ import dotenv from 'dotenv';
 dotenv.config({ path: '.env.local' });
 // Configure dotenv before other imports
 import { DocumentInterface } from '@langchain/core/documents';
-import { PuppeteerWebBaseLoader } from 'langchain/document_loaders/web/puppeteer';
 import { Redis } from '@upstash/redis';
-import { DirectoryLoader } from 'langchain/document_loaders/fs/directory';
+import { JSONLoader } from 'langchain/document_loaders/fs/json';
+
 import { TextLoader } from 'langchain/document_loaders/fs/text';
 import { RecursiveCharacterTextSplitter } from 'langchain/text_splitter';
 import { getEmbeddingsCollection, getVectorStore } from '../src/lib/astradb';
 
-import * as cheerio from 'cheerio';
-import * as puppeteer from 'puppeteer';
 import { Document } from 'langchain/document';
+
+import data from './DBdata.json';
 
 const fs = require('fs');
 
@@ -22,117 +22,47 @@ async function generateEmbeddings() {
 
   (await getEmbeddingsCollection()).deleteAll();
 
-  const url = 'https://decent-bet.vercel.app/';
+  
+// const loader = new JSONLoader('./scripts/DBdata.json', [
+//   '/teamA',
+//   '/teamB',
+//   '/matchId',
+//   "/status",
+// ]);
 
-  const loader = new PuppeteerWebBaseLoader(url, {
-    launchOptions: {
-      headless: 'new',
-    },
-    async evaluate(page: puppeteer.Page, browser: puppeteer.Browser) {
-      try {
-        await page.goto(url, { waitUntil: 'networkidle2' });
-        const textContent = await page.evaluate(() => {
-          // Clean up the HTML content and extract the text
-          const bodyElement = document.querySelector('body');
-          return bodyElement ? bodyElement.textContent : '';
-        });
-        await browser.close();
-        return textContent || '';
-      } catch (error) {
-        console.error('Error occurred while loading the page: ', error);
-        await browser.close();
-        return ''; // return empty string in case of an error
-      }
-    },
-  });
+// const docs = await loader.load();
 
-  console.log('Loading URL to Docs');
+let allDocs = [];
 
-  const urlDocs = await loader.load();
-  const pageContent = urlDocs[0].pageContent; // Access the extracted text content
+ for  (const { teamA, teamB, matchId, status} of data) {
+ 
+allDocs.push({
+  pageContent: `cricket match between ${teamA} and ${teamB}`,
+  Content: { teamA, teamB },
+  metadata: {
+    matchId,
+    status,
+  },
+});
+}
 
-  // console.log(pageContent);
 
-  fs.writeFile(
-    'split-documents1.json',
-    JSON.stringify(pageContent, null, 2),
-    (err: any) => {
-      if (err) {
-        console.error(err);
-        return;
-      }
-      console.log('Data written to file successfully');
+
+fs.writeFile(
+  `${__dirname}/DBdata1.json`,
+  JSON.stringify(allDocs, null, 2),
+  (err: any) => {
+    if (err) {
+      console.error(err);
+      return;
     }
-  );
-
-  // Load the HTML content into cheerio
-  const $ = cheerio.load(pageContent);
-
-  $('script, style').remove(); // Remove unnecessary elements
-
-  // Further clean-up using regular expressions (example)
-  const cleanedText = $('body')
-    .html()
-    ?.replace(/<style[^>]*>.*<\/style>/gms, '');
-
-  // Load the cleaned HTML again to extract text
-  const cleaned$ = cheerio.load(cleanedText!);
-
-  // Extract the text from the HTML content
-  const textContent = cleaned$('body').text();
-
-  // console.log(textContent);
-
-  const docs = textContent.replace(/[^\x20-\x7E]+/g, ''); // Remove non-ASCII characters
-
-  // Create Document instances
-  const documents = [new Document({ pageContent: pageContent })];
-
-  const splitter = new RecursiveCharacterTextSplitter({
-    chunkSize: 1000,
-    chunkOverlap: 50,
-  });
-
-  const splitDocuments = await splitter.splitDocuments(documents);
-
-  fs.writeFile(
-    'split-documents.json',
-    JSON.stringify(splitDocuments, null, 2),
-    (err: any) => {
-      if (err) {
-        console.error(err);
-        return;
-      }
-      console.log('Data written to file successfully');
-    }
-  );
-
-  // Process and store embeddings in batches
-  const batchSize = 10; // Adjust based on your needs
-  let allDocs = [];
-
-  for (let i = 0; i < splitDocuments.length; i += batchSize) {
-    const batch = splitDocuments.slice(i, i + batchSize);
-
-    // Add batch documents to allDocs array
-    allDocs.push(...batch);
+    console.log('Data written to file successfully');
   }
-
-  fs.writeFile(
-    'split-documents2.json',
-    JSON.stringify(allDocs, null, 2),
-    (err: any) => {
-      if (err) {
-        console.error(err);
-        return;
-      }
-      console.log('Data written to file successfully');
-    }
-  );
+);
 
   // Load the docs into the vector store
 
-  // await vectorStore.addDocuments(allDocs);
+  await vectorStore.addDocuments(allDocs);
 }
 
 generateEmbeddings();

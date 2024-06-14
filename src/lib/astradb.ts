@@ -23,12 +23,13 @@ export async function getVectorStore() {
       token,
       endpoint,
       collection,
+     
       collectionOptions: {
         vector: {
           dimension: 1536,
           metric: 'cosine',
         },
-      },
+        }
     }
   );
 }

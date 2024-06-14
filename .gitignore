@@ -38,3 +38,4 @@ next-env.d.ts
 # Ignore dBetFirebasePrivateKeys.json and split-documents.json
 dBetFirebasePrivateKeys.json
 DBdata.json
+DBdata1.json
