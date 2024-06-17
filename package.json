@@ -11,7 +11,7 @@
     "lint": "next lint"
   },
   "dependencies": {
-    "@datastax/astra-db-ts": "^1.1.0",
+    "@datastax/astra-db-ts": "^1.2.1",
     "@langchain/community": "^0.0.53",
     "@langchain/openai": "^0.0.28",
     "@next/font": "^13.4.9",
