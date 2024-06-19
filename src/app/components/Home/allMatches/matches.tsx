@@ -39,8 +39,7 @@ export default function Matches() {
         <div className="w-full flex justify-center  flex-wrap items-center">
           {' '}
           {[...Array(12)].map((a) => (
-            // eslint-disable-next-line react/jsx-key
-            <CardSkelton />
+            <CardSkelton key={a} />
           ))}
         </div>
       ) : null}
