@@ -1,21 +1,17 @@
 import dotenv from 'dotenv';
 dotenv.config({ path: '.env.local' });
 // Configure dotenv before other imports
-import { DocumentInterface } from '@langchain/core/documents';
 import { Redis } from '@upstash/redis';
-import { JSONLoader } from 'langchain/document_loaders/fs/json';
 
-import { TextLoader } from 'langchain/document_loaders/fs/text';
-import { RecursiveCharacterTextSplitter } from 'langchain/text_splitter';
 import { getEmbeddingsCollection, getVectorStore } from '../src/lib/astradb';
 
-import { Document } from 'langchain/document';
 
 import data from './DBdata.json';
+import data1 from './DBwebData.json';
 
 const fs = require('fs');
 
-async function generateEmbeddings() {
+ async function generateEmbeddings() {
   await Redis.fromEnv().flushdb();
 
   const vectorStore = await getVectorStore();
@@ -23,42 +19,54 @@ async function generateEmbeddings() {
   (await getEmbeddingsCollection()).deleteAll();
 
   
-// const loader = new JSONLoader('./scripts/DBdata.json', [
-//   '/teamA',
-//   '/teamB',
-//   '/matchId',
-//   "/status",
-// ]);
 
-// const docs = await loader.load();
+  let allDocs: any = [];
 
-let allDocs = [];
+   for  (const { teamA, teamB, matchId, status} of data) {
 
- for  (const { teamA, teamB, matchId, status} of data) {
- 
-allDocs.push({
-  pageContent: `cricket match between ${teamA} and ${teamB}`,
-  Content: { teamA, teamB },
-  metadata: {
-    matchId,
-    status,
-  },
-});
-}
+  let matchStatus = 'match status unknown';
 
-
-
-fs.writeFile(
-  `${__dirname}/DBdata1.json`,
-  JSON.stringify(allDocs, null, 2),
-  (err: any) => {
-    if (err) {
-      console.error(err);
-      return;
+    if (status === "Yet_to_Start"){
+      matchStatus = 'Yet_to_Start or bet ongoing or match about to start and available to bet';
+    }else if (status === 'in_Progress') {
+      matchStatus = 'in_Progress or closed for bet or this match not-available for bet';
+    }else if (status === 'Finished') {
+      matchStatus = 'Finished or this match not-available for bet';
     }
-    console.log('Data written to file successfully');
+      allDocs.push({
+        pageContent: `cricket match between ${teamA} and ${teamB}`,
+        Content: { teamA, teamB },
+        metadata: {
+          matchId,
+          matchStatus,
+        },
+      });
   }
-);
+
+  
+
+   for  (const i in data1) {
+
+   allDocs.push({
+        pageContent: JSON.stringify((data1 as any)[i]),
+       
+        metadata: {
+         title : i
+        },
+      });
+  }
+
+  fs.writeFile(
+    `${__dirname}/DBdata1.json`,
+    JSON.stringify(allDocs, null, 2),
+    (err: any) => {
+      if (err) {
+        console.error(err);
+        return;
+      }
+      console.log('Data written to file successfully');
+    }
+  );
 
   // Load the docs into the vector store
 
