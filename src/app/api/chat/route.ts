@@ -101,6 +101,7 @@ console.log('api requested,dddddddddddddddddddddddddddddd')
         'system',
         "You are a chatbot for a Decentralized betting website named DecentBet. You impersonate the website's owner. " +
           "Answer the user's questions based on the below context. " +
+          'ask user if user get to know the stats of last 5 matches between them. ' +
           'Format your messages in markdown format.\n\n' +
           'Context:\n{context}',
       ],
