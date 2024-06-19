@@ -7,7 +7,6 @@ import { ethers } from 'ethers';
 
 import { collection, doc, where, query } from 'firebase/firestore';
 import {
-  useContractRead,
   useAddress,
   ConnectWallet,
 } from '@thirdweb-dev/react';
@@ -17,15 +16,12 @@ import { toast } from 'react-toastify';
 import { db } from '../../../../firebase';
 
 import MatchCard from './matchCard';
-import { Store } from '@/app/context/store';
 import { MainSpinner } from '../miscellaneous/loaders/spinners';
 import Balance from './fetchBalance/Balance';
-import Matches from '../Home/allMatches/matches';
 
 type Props = {};
 
 export default function myMatches({}: Props) {
-  const sportsPredictorContract = useContext(Store);
   const address = useAddress();
   const router = useRouter();
 
@@ -74,27 +70,29 @@ export default function myMatches({}: Props) {
       {!contests?.empty && contests ? (
         <div className="bg-purple-100 mb-20 ">
           <Balance />
-          <h1 className="text-4xl my-8  text-center pt-10  font-bold font-serif  italic">
-            <span className="underline underline-offset-3 decoration-8 decoration-blue-400 ">
-              My Matches
-            </span>
-          </h1>
-          <div className="text-center font-mono text-gray-500 select-none font-semibold mt-4">
-            The matches are displayed after blocks have been confirmed, so it
-            isn't real-time.
-          </div>
-          <div className="w-screen flex flex-col items-center">
-            {contests?.docs.map((doc) => {
-              const data = doc?.data();
-              return (
-                <MatchCard
-                  matchId={data?.matchId}
-                  teamAstake={ethers.utils.formatEther(`${data?.teamA || 0}`)}
-                  teamBstake={ethers.utils.formatEther(`${data?.teamB || 0}`)}
-                  key={doc.id}
-                />
-              );
-            })}
+          <div className="bg-green-100">
+            <h1 className="text-4xl my-8  text-center pt-10  font-bold font-serif  italic">
+              <span className="underline underline-offset-3 decoration-8 decoration-blue-400 ">
+                My Matches
+              </span>
+            </h1>
+            <div className="text-center font-mono text-gray-500 select-none font-semibold mt-4">
+              The matches are displayed after blocks have been confirmed, so it
+              isn't real-time.
+            </div>
+            <div className="w-screen flex flex-col items-center">
+              {contests?.docs.map((doc) => {
+                const data = doc?.data();
+                return (
+                  <MatchCard
+                    matchId={data?.matchId}
+                    teamAstake={ethers.utils.formatEther(`${data?.teamA || 0}`)}
+                    teamBstake={ethers.utils.formatEther(`${data?.teamB || 0}`)}
+                    key={doc.id}
+                  />
+                );
+              })}
+            </div>
           </div>
         </div>
       ) : (
