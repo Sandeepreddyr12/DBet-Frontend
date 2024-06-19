@@ -29,7 +29,6 @@ const ratelimit = new Ratelimit({
 
 export async function POST(req: NextRequest) {
 
-console.log('api requested,dddddddddddddddddddddddddddddd')
 
   try {
 
@@ -127,7 +126,7 @@ console.log('api requested,dddddddddddddddddddddddddddddd')
 
     return new StreamingTextResponse(stream);
   } catch (error) {
-    console.error("Error:---",error);
+    // console.error("Error:---",error);
     return NextResponse.json({ error: 'Internal server error' }, { status: 500 });
   }
 }
