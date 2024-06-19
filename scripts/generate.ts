@@ -74,3 +74,10 @@ const fs = require('fs');
 }
 
 generateEmbeddings();
+
+
+
+
+// "build": "npm run generate && next build",
+    // "generate": "npx ts-node ./scripts/generate.ts",
+    // "datafetch": "npx ts-node ./scripts/dataFetcher.ts",
